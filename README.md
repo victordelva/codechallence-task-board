@@ -11,15 +11,15 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 
 
 ## What we value
-* REST api design
-* Testing Strategy
-  * Provide the right amount of unit/integration/end-to-end tests following the testing pyramid or any principle you choose.
-* Effective Architectural and design decisions
-  * Separating business rules from infrastructure details
 * Simple design
   * SOLID
   * KISS
   * DRY
+* Effective Architectural and design decisions
+  * Separating business rules from infrastructure details
+* REST api design
+* Testing Strategy
+  * Provide the right amount of unit/integration/end-to-end tests following the testing pyramid or any principle you choose.
 * Straightforward setup and execution
 
 | :memo: | We understand that all decisions in Engineering are tradeoffs, so please include a readme with your decision-making process. |
