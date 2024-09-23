@@ -6,7 +6,7 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 * There can only be two cards in DOING at any time
 * Once in Done, cards cannot go back
 * Moving cards to DONE will trigger a confirmation dialog
-* All actions on the board must be validated client-side
+* All actions on the board must be validated at least server-side
 * Board to be stored in Local Storage
 
 
