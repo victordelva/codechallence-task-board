@@ -2,7 +2,7 @@
   "extends": ["next/core-web-vitals", "next/typescript"],
   "overrides": [
     {
-      "files": ["/**/*.spec.ts"],
+      "files": ["**/*.spec.ts"],
       "env": {
         "jest": true
       }
