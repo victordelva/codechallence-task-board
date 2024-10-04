@@ -1,4 +1,4 @@
-export default function Task({
+export default function TaskComponent({
 	title
   }:{
 	title: string;

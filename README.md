@@ -29,6 +29,8 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 
 1. Unit tests for core functionality. Task movements validations on the board
 2. Using Object mother pattern to create test data
+3. Board movement restrictions are defined on the domain model, since we don't expect them to change. Otherwise, we'd save the restrictions on the database.
+4. I saved the task on localStorage as specified in the task. But we could just retrieve them.
 
 ## Improvements
 

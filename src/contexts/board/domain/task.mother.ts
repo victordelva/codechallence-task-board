@@ -1,5 +1,5 @@
-import {TaskStatus} from "@/board-context/domain/task-status.enum";
-import {Task} from "@/board-context/domain/task";
+import {TaskStatus} from "@/contexts/board/domain/task-status.enum";
+import {Task} from "@/contexts/board/domain/task";
 import {v4} from "uuid";
 
 export class TaskMother {

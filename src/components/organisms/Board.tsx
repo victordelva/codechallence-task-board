@@ -1,26 +1,25 @@
 "use client"
-import {useState} from "react";
 import Column from "@/components/organisms/Column";
-import Task from "@/components/organisms/Task";
+import {useTasksByStatus} from "@/contexts/board/infrastructure/hooks/useTasksByStatus";
+import TaskComponent from "@/components/organisms/TaskComponent";
+import {TaskStatus} from "@/contexts/board/domain/task-status.enum";
 
 
 export function Board() {
+	const {data: tasksByStatus, refetch} = useTasksByStatus();
+
 	return (
 		<div className="flex overflow-x-scroll h-dvh m-2">
-			<Column
-				title="BACKLOG"
-			>
-				<Task title={"Task 1"} />
-			</Column>
-			<Column
-				title="TODO"
-			/>
-			<Column
-				title="DOING"
-			/>
-			<Column
-				title="DONE"
-			/>
+			{Object.keys(TaskStatus).map((status) => (
+				<Column
+					key={status}
+					title={status}
+				>
+					{tasksByStatus[status as TaskStatus]?.map(task => (
+						<TaskComponent title={task.id} key={task.id}/>
+					))}
+				</Column>
+			))};
 		</div>
 	);
 }
