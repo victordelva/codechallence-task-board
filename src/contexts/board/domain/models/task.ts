@@ -1,4 +1,5 @@
 import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
+import {v4} from "uuid";
 
 export class Task {
 	id: string;
@@ -17,5 +18,19 @@ export class Task {
 		this.id = id;
 		this.status = status;
 		this.title = title;
+	}
+
+	static create = ({
+		status,
+		title,
+	}: {
+		status?: TaskStatus,
+		title: string,
+	}) => {
+		return new Task({
+			id: v4(),
+			status: status || TaskStatus.BACKLOG,
+			title,
+		});
 	}
 }

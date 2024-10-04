@@ -1,21 +1,15 @@
 import {GetTasksUseCase} from "@/contexts/board/application/get-tasks/get-tasks.use-case";
-import {TaskRepositoryInterface} from "@/contexts/board/domain/interfaces/task-repository.interface";
 import {TaskMother} from "@/contexts/board/domain/models/task.mother";
 import {Task} from "@/contexts/board/domain/models/task";
 import {GetTasksResponse} from "@/contexts/board/application/get-tasks/get-tasks.response";
+import mockTaskRepository from "@/contexts/board/__mocks__/task-respository.mock";
 
 describe('GetTasksUseCase unit test', () => {
 	let getTasksUseCase: GetTasksUseCase;
-	let mockTaskRepository: jest.Mocked<TaskRepositoryInterface>;
 
 	beforeAll(() => {
-		mockTaskRepository = {
-			findAll: jest.fn(),
-			save: jest.fn(),
-		};
-
 		getTasksUseCase = new GetTasksUseCase(
-			mockTaskRepository
+			{taskRepository: mockTaskRepository}
 		);
 	});
 

@@ -4,7 +4,7 @@ import {GetTasksResponse} from "@/contexts/board/application/get-tasks/get-tasks
 export class GetTasksUseCase {
 	private taskRepository: TaskRepositoryInterface;
 
-	constructor(taskRepository: TaskRepositoryInterface) {
+	constructor({taskRepository}:{taskRepository: TaskRepositoryInterface}) {
 		this.taskRepository = taskRepository;
 	}
 
