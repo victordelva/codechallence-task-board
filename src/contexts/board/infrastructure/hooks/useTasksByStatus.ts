@@ -1,8 +1,8 @@
 import useSWR from "swr";
 import {fetcher} from "@/contexts/shared/infrastructure/fetcher";
 import {TaskType, taskMapperToDomain} from "@/contexts/board/infrastructure/mapper/task.mapper";
-import {Task} from "@/contexts/board/domain/task";
-import {TaskStatus} from "@/contexts/board/domain/task-status.enum";
+import {Task} from "@/contexts/board/domain/models/task";
+import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 
 export function useTasksByStatus() {
 	const { data, error, mutate } = useSWR<{ tasks: TaskType[] }>(`/api/tasks`, fetcher);

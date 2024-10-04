@@ -35,3 +35,5 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 ## Improvements
 
 1. Dynamics columns. For simplicity I'll keep the columns as mentioned in the task description.
+2. Using different database for dev and test.
+3. Paginate tasks retrieval

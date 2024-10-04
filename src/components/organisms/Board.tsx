@@ -2,7 +2,7 @@
 import Column from "@/components/organisms/Column";
 import {useTasksByStatus} from "@/contexts/board/infrastructure/hooks/useTasksByStatus";
 import TaskComponent from "@/components/organisms/TaskComponent";
-import {TaskStatus} from "@/contexts/board/domain/task-status.enum";
+import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 
 
 export function Board() {

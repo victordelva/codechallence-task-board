@@ -1,5 +1,5 @@
-import {Task} from "@/contexts/board/domain/task";
-import {TaskStatus} from "@/contexts/board/domain/task-status.enum";
+import {Task} from "@/contexts/board/domain/models/task";
+import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 
 export type TaskType = {
 	id: string;

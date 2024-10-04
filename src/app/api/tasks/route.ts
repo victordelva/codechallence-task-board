@@ -1,13 +1,12 @@
-import {NextRequest, NextResponse} from "next/server";
-import {TaskMother} from "@/contexts/board/domain/task.mother";
+import { NextResponse } from "next/server";
+import {containerDependencies} from "@/contexts/board/infrastructure/dependencies/containerDependencies";
 
-export async function GET(request: NextRequest) {
+export async function GET(
+	// request: NextRequest
+) {
+	const {getTaskUseCase} = containerDependencies();
+
 	return NextResponse.json({
-		tasks: [
-			TaskMother.random(),
-			TaskMother.random(),
-			TaskMother.random(),
-			TaskMother.random(),
-		],
+		tasks: await getTaskUseCase.execute(),
 	}, { status: 200 });
 }

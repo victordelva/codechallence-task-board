@@ -1,7 +1,7 @@
 import {describe, expect, it} from '@jest/globals';
-import {BoardMother} from "@/contexts/board/domain/board.mother";
-import {TaskMother} from "@/contexts/board/domain/task.mother";
-import {TaskStatus} from "@/contexts/board/domain/task-status.enum";
+import {BoardMother} from "@/contexts/board/domain/models/board.mother";
+import {TaskMother} from "@/contexts/board/domain/models/task.mother";
+import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 
 describe('Board tests', () => {
 	describe('checks possible movements', () => {
