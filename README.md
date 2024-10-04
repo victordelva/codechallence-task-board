@@ -26,3 +26,10 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 |--------|:-----------------------------------------------------------------------------------------------------------------------------|
 
 # Decisions
+
+1. Unit tests for core functionality. Task movements validations on the board
+2. Using Object mother pattern to create test data
+
+## Improvements
+
+1. Dynamics columns. For simplicity I'll keep the columns as mentioned in the task description.
