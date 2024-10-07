@@ -1,5 +1,6 @@
 import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 import {Task} from "@/contexts/board/domain/models/task";
+import {InvalidTaskMovementError} from "@/contexts/board/domain/errors/invalid-task-movement.error";
 
 export class Board {
 	tasks: Task[];
@@ -38,5 +39,14 @@ export class Board {
 			return tasksInStatus.length < maxCards;
 		});
 		return statuses;
+	}
+
+	moveTask(task: Task, status: TaskStatus): Task {
+		if (!this.getPossibleMoves(task).includes(status)) {
+			throw new InvalidTaskMovementError();
+		}
+
+		task.update({status});
+		return task;
 	}
 }

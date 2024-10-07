@@ -25,7 +25,7 @@ describe('CreateTaskUseCase unit test', () => {
 			status: task.status,
 		});
 
-		expect(mockTaskRepository.save).toBeCalledTimes(1);
+		expect(mockTaskRepository.save).toHaveBeenCalledTimes(1);
 		expect(mockTaskRepository.save).toHaveBeenCalledWith({
 			id,
 			title: task.title,

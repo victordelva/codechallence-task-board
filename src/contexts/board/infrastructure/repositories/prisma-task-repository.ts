@@ -21,6 +21,24 @@ export class PrismaTaskRepository implements TaskRepositoryInterface {
 		})
 	}
 
+	async findById(taskId: string) {
+		const taskRaw = await this.prisma.tasks.findUnique({
+			where: {
+				id: taskId,
+			}
+		});
+
+		if (!taskRaw) {
+			return null;
+		}
+
+		return new Task({
+			id: taskRaw.id,
+			status: taskRaw.status as TaskStatus,
+			title: taskRaw.title,
+		})
+	}
+
 	async save(task: Task) {
 		await this.prisma.tasks.upsert({
 			where: {id: task.id},

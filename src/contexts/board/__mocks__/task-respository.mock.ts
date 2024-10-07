@@ -5,6 +5,7 @@ let mockTaskRepository: jest.Mocked<TaskRepositoryInterface>;
 mockTaskRepository = {
 	findAll: jest.fn(),
 	save: jest.fn(),
+	findById: jest.fn(),
 };
 
 export default mockTaskRepository;

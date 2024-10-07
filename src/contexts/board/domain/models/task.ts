@@ -33,4 +33,15 @@ export class Task {
 			title,
 		});
 	}
+
+	update({
+		status,
+		title,
+	}: {
+		status?: TaskStatus,
+		title?: string,
+	}) {
+		this.status = status || this.status;
+		this.title = title || this.title;
+	}
 }
