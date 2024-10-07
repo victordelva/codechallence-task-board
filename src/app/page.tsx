@@ -1,9 +1,9 @@
-import {Board} from "@/components/organisms/Board";
+import {BoardComponent} from "@/components/organisms/BoardComponent";
 
 export default function Home() {
   return (
     <div>
-      <Board />
+      <BoardComponent />
     </div>
   );
 }

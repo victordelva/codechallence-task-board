@@ -1,5 +1,4 @@
 import {TaskRepositoryInterface} from "@/contexts/board/domain/interfaces/task-repository.interface";
-import {Task} from "@/contexts/board/domain/models/task";
 import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 import {UpdateTaskFromBoardRequest} from "@/contexts/board/application/update-task-from-board/update-task-from-board.request";
 import {TaskNotFoundError} from "@/contexts/board/domain/errors/task-not-found.error";

@@ -22,7 +22,6 @@ export async function POST(request: NextRequest) {
 
 	await createTaskUseCase.execute({
 		title: body.title,
-		status: body.status,
 	})
 
 	return NextResponse.json("", { status: 201 });

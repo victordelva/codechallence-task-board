@@ -21,15 +21,13 @@ export class Task {
 	}
 
 	static create = ({
-		status,
 		title,
 	}: {
-		status?: TaskStatus,
 		title: string,
 	}) => {
 		return new Task({
 			id: v4(),
-			status: status || TaskStatus.BACKLOG,
+			status: TaskStatus.BACKLOG,
 			title,
 		});
 	}
