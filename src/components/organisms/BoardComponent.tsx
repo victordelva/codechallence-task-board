@@ -36,7 +36,6 @@ export function BoardComponent() {
           >
             {tasksByStatus[status]?.map((task) => (
               <TaskComponent
-                id={task.id}
                 title={task.title}
                 key={task.id}
                 status={task.status}

@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect } from "react";
 
 const Popup = ({
   isOpen,

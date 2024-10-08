@@ -1,8 +1,6 @@
 import { TaskRepositoryInterface } from "@/contexts/board/domain/interfaces/task-repository.interface";
 
-let mockTaskRepository: jest.Mocked<TaskRepositoryInterface>;
-
-mockTaskRepository = {
+const mockTaskRepository: jest.Mocked<TaskRepositoryInterface> = {
   findAll: jest.fn(),
   save: jest.fn(),
   findById: jest.fn(),

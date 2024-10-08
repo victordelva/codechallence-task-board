@@ -36,7 +36,7 @@ export function TaskForm({
     });
 
     setIsLoading(false);
-    onSave && onSave();
+    onSave();
   };
 
   return (

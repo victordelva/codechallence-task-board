@@ -2,12 +2,10 @@ import StatusChip from "@/components/atoms/StatusChip";
 import { TaskStatus } from "@/contexts/board/domain/models/task-status.enum";
 
 export default function TaskComponent({
-  id,
   title,
   status,
   onClick,
 }: {
-  id: string;
   title: string;
   status: TaskStatus;
   onClick: () => void;

@@ -90,14 +90,14 @@ describe("BoardComponent tests", () => {
       expect(movedTask.status).toBe(TaskStatus.DONE);
     });
     it("should not be able to move from DONE", () => {
-      let movedTask = TaskMother.random({ status: TaskStatus.DONE });
+      const movedTask = TaskMother.random({ status: TaskStatus.DONE });
       const board = BoardMother.random({ tasks: [movedTask] });
       expect(() => {
         board.moveTask(movedTask, TaskStatus.DONE);
       }).toThrow(InvalidTaskMovementError);
     });
     it("should not be able to move to DOING when there are more than 2 tasks", () => {
-      let movedTask = TaskMother.random({ status: TaskStatus.TODO });
+      const movedTask = TaskMother.random({ status: TaskStatus.TODO });
       const board = BoardMother.random({
         tasks: [
           movedTask,
