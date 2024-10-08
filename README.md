@@ -31,15 +31,18 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 
 1. Unit tests for core functionality. Task movements validations on the board
 2. Integration tests on repositories for validating database connection and scheme.
-3. Given we are using Next.js for route definition and the simplicity of the route, unit testing the use case should provide sufficient coverage. So end-to-end tests for api routes are not necessary.
+3. Given we are using Next.js for route definition and the simplicity of the route, unit testing the use case should provide sufficient coverage. So end-to-end tests for api routes are not developed.
 4. Using Object mother pattern to create test data
 5. Board movement restrictions are defined on the domain model, since we don't expect them to change. Otherwise, we'd save the restrictions on the database.
 6. I decided to specify the one column movement restriction on the board (instead of the task), since it looks more scalable to me.
-   7I saved the task on localStorage as specified in the task. But we could just retrieve them from database
+7. I saved the task on localStorage as specified in the task. But we could just retrieve them from database
+8. Used DDD
+9. Used TDD
+10. Used Hexagonal Architecture
 
 ## Improvements
 
-1. Dynamics columns. For simplicity I'll keep the columns as mentioned in the task description.
+1. Dynamics columns. For simplicity I'll keep the status columns as mentioned in the task description (BACKLOG, TODO, DOING, DONE).
 2. Using different database for dev and test.
 3. Paginate tasks retrieval
 4. Using drag and drop library for moving tasks.
