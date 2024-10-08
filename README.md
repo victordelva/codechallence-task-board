@@ -39,6 +39,7 @@ Using NextJS, React, and any SQL database, develop a full stack solution for a B
 8. Used DDD
 9. Used TDD
 10. Used Hexagonal Architecture
+11. Used Atomic Design for components
 
 ## Improvements
 
