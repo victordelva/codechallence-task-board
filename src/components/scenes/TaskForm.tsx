@@ -55,7 +55,7 @@ export function TaskForm({
 				<StatusChip status={status} />
 			</div>
 			<div className="mt-5 font-semibold">
-				Move task
+				Move task to:
 			</div>
 			<div className="flex gap-2 mt-2">
 				{possibleMoves?.length > 0 && possibleMoves.map((newStatus) => (

@@ -5,32 +5,32 @@ import {InvalidTaskMovementError} from "@/contexts/board/domain/errors/invalid-t
 export class Board {
 	tasks: Task[];
 
-	constructor({tasks}: {tasks: Task[]}) {
-		this.tasks = tasks;
-	}
-
-	private statusRestrictions: { [key in TaskStatus]: TaskStatus[] } = {
-		[TaskStatus.BACKLOG]: [TaskStatus.TODO],
-		[TaskStatus.TODO]: [TaskStatus.BACKLOG, TaskStatus.DOING],
-		[TaskStatus.DOING]: [TaskStatus.TODO, TaskStatus.DONE],
-		[TaskStatus.DONE]: [],
-	};
-
-	private maxCardsInColumn: { [key in Partial<TaskStatus>]: number|null } = {
+	static maxCardsInColumn: { [key in Partial<TaskStatus>]: number|null } = {
 		[TaskStatus.BACKLOG]: null,
 		[TaskStatus.TODO]: null,
 		[TaskStatus.DOING]: 2,
 		[TaskStatus.DONE]: null,
 	};
 
+	static statusRestrictions: { [key in TaskStatus]: TaskStatus[] } = {
+		[TaskStatus.BACKLOG]: [TaskStatus.TODO],
+		[TaskStatus.TODO]: [TaskStatus.BACKLOG, TaskStatus.DOING],
+		[TaskStatus.DOING]: [TaskStatus.TODO, TaskStatus.DONE],
+		[TaskStatus.DONE]: [],
+	};
+
+	constructor({tasks}: {tasks: Task[]}) {
+		this.tasks = tasks;
+	}
+
 	getTasksInStatus(status: TaskStatus): Task[] {
 		return this.tasks.filter((task) => task.status === status);
 	}
 
 	getPossibleMoves(task: Task): TaskStatus[] {
-		let statuses = this.statusRestrictions[task.status];
+		let statuses = Board.statusRestrictions[task.status];
 		statuses = statuses.filter((status) => {
-			const maxCards = this.maxCardsInColumn[status];
+			const maxCards = Board.maxCardsInColumn[status];
 			if (maxCards === null) {
 				return true;
 			}

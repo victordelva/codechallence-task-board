@@ -27,12 +27,13 @@ export function BoardComponent() {
 	return (
 		<>
 			<div className="flex overflow-x-scroll h-dvh m-2">
-				{Object.keys(TaskStatus).map((status) => (
+				{Object.values(TaskStatus).map((status) => (
 					<Column
 						key={status}
-						title={status}
+						status={status}
+						totalTasks={tasksByStatus[status as TaskStatus]?.length || 0}
 					>
-						{tasksByStatus[status as TaskStatus]?.map(task => (
+						{tasksByStatus[status]?.map(task => (
 							<TaskComponent
 								id={task.id}
 								title={task.title}
