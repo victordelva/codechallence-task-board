@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { OptionButton } from "@/components/molecules/OptionButton";
 import { Input } from "@/components/atoms/Input";
+import Popup from "@/components/molecules/PopUp";
 
 export function TaskForm({
   id,
@@ -22,8 +23,18 @@ export function TaskForm({
   const [isLoading, setIsLoading] = useState(false);
   const [_title, setTitle] = useState(title);
   const [_status, setStatus] = useState<TaskStatus | null>(null);
+  const confirmationRequiredOnStatus = [TaskStatus.DONE];
+  const [confirmationPopUpOpen, setConfirmationPopUpOpen] = useState(false);
 
   const save = async () => {
+    if (_status && confirmationRequiredOnStatus.includes(_status)) {
+      setConfirmationPopUpOpen(true);
+    } else {
+      await saveApiRequest();
+    }
+  };
+
+  const saveApiRequest = async () => {
     if (isLoading) return;
     setIsLoading(true);
 
@@ -34,7 +45,6 @@ export function TaskForm({
         status: _status,
       }),
     });
-
     setIsLoading(false);
     onSave();
   };
@@ -75,6 +85,30 @@ export function TaskForm({
           Save
         </Button>
       </div>
+      <Popup
+        isOpen={confirmationPopUpOpen}
+        onClose={() => setConfirmationPopUpOpen(false)}
+      >
+        <div className="flex flex-col items-center gap-4">
+          <h2 className="font-bold text-2xl">Confirmation required</h2>
+          <div>Are you sure you want to change the status to {_status}?</div>
+          <div>{"You won't be able to undo this action."}</div>
+          <div className="flex gap-2">
+            <Button
+              className="bg-green-500 hover:bg-green-600 min-w-20"
+              onClick={saveApiRequest}
+            >
+              Yes, continue
+            </Button>
+            <Button
+              className="min-w-20"
+              onClick={() => setConfirmationPopUpOpen(false)}
+            >
+              No, go back
+            </Button>
+          </div>
+        </div>
+      </Popup>
     </>
   );
 }
