@@ -1,4 +1,4 @@
-import {BoardComponent} from "@/components/organisms/BoardComponent";
+import { BoardComponent } from "@/components/organisms/BoardComponent";
 
 export default function Home() {
   return (

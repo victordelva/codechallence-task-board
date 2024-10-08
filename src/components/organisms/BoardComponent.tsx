@@ -1,70 +1,70 @@
-"use client"
+"use client";
 import Column from "@/components/organisms/Column";
-import {useTasksByStatus} from "@/contexts/board/infrastructure/hooks/useTasksByStatus";
+import { useTasksByStatus } from "@/contexts/board/infrastructure/hooks/useTasksByStatus";
 import TaskComponent from "@/components/organisms/TaskComponent";
-import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
+import { TaskStatus } from "@/contexts/board/domain/models/task-status.enum";
 import Popup from "@/components/molecules/PopUp";
-import {useEffect, useState} from "react";
-import {Task} from "@/contexts/board/domain/models/task";
-import {Board} from "@/contexts/board/domain/models/board";
-import {TaskForm} from "@/components/scenes/TaskForm";
-
+import { useEffect, useState } from "react";
+import { Task } from "@/contexts/board/domain/models/task";
+import { Board } from "@/contexts/board/domain/models/board";
+import { TaskForm } from "@/components/scenes/TaskForm";
 
 export function BoardComponent() {
-	const {data: tasksByStatus, all: tasks, refetch} = useTasksByStatus();
-	const [showPopup, setShowPopup] = useState(false);
-	const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-	const [selectedTaskPossibleMoves, setSelectedTaskPossibleMoves] = useState<TaskStatus[]>([]);
+  const { data: tasksByStatus, all: tasks, refetch } = useTasksByStatus();
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [selectedTaskPossibleMoves, setSelectedTaskPossibleMoves] = useState<
+    TaskStatus[]
+  >([]);
 
-	useEffect(() => {
-		if (selectedTask) {
-			const board = new Board({tasks});
-			const possibleMoves = board.getPossibleMoves(selectedTask);
-			setSelectedTaskPossibleMoves(possibleMoves);
-		}
-	}, [tasks, selectedTask]);
+  useEffect(() => {
+    if (selectedTask) {
+      const board = new Board({ tasks });
+      const possibleMoves = board.getPossibleMoves(selectedTask);
+      setSelectedTaskPossibleMoves(possibleMoves);
+    }
+  }, [tasks, selectedTask]);
 
-	return (
-		<>
-			<div className="flex overflow-x-scroll h-dvh m-2">
-				{Object.values(TaskStatus).map((status) => (
-					<Column
-						key={status}
-						status={status}
-						totalTasks={tasksByStatus[status as TaskStatus]?.length || 0}
-					>
-						{tasksByStatus[status]?.map(task => (
-							<TaskComponent
-								id={task.id}
-								title={task.title}
-								key={task.id}
-								status={task.status}
-								onClick={() => {
-									setSelectedTask(task);
-									setShowPopup(true);
-								}}
-							/>
-						))}
-					</Column>
-				))};
-			</div>
+  return (
+    <>
+      <div className="flex overflow-x-scroll h-dvh m-2">
+        {Object.values(TaskStatus).map((status) => (
+          <Column
+            key={status}
+            status={status}
+            totalTasks={tasksByStatus[status as TaskStatus]?.length || 0}
+          >
+            {tasksByStatus[status]?.map((task) => (
+              <TaskComponent
+                id={task.id}
+                title={task.title}
+                key={task.id}
+                status={task.status}
+                onClick={() => {
+                  setSelectedTask(task);
+                  setShowPopup(true);
+                }}
+              />
+            ))}
+          </Column>
+        ))}
+        ;
+      </div>
 
-			<Popup
-				isOpen={showPopup}
-				onClose={() => setShowPopup(false)}
-			>
-				{selectedTask &&
-					<TaskForm
-							id={selectedTask.id}
-							title={selectedTask.title}
-							status={selectedTask.status}
-							possibleMoves={selectedTaskPossibleMoves}
-							onSave={async () => {
-								refetch();
-								setShowPopup(false);
-							}}
-					/>}
-			</Popup>
-		</>
-	);
+      <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}>
+        {selectedTask && (
+          <TaskForm
+            id={selectedTask.id}
+            title={selectedTask.title}
+            status={selectedTask.status}
+            possibleMoves={selectedTaskPossibleMoves}
+            onSave={async () => {
+              refetch();
+              setShowPopup(false);
+            }}
+          />
+        )}
+      </Popup>
+    </>
+  );
 }
