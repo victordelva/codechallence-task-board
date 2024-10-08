@@ -2,6 +2,7 @@ import {TaskMother} from "@/contexts/board/domain/models/task.mother";
 import {Task} from "@/contexts/board/domain/models/task";
 import mockTaskRepository from "@/contexts/board/__mocks__/task-respository.mock";
 import {CreateTaskUseCase} from "@/contexts/board/application/create-task/create-task.use-case";
+import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 
 describe('CreateTaskUseCase unit test', () => {
 	let createTaskUseCase: CreateTaskUseCase;
@@ -17,19 +18,15 @@ describe('CreateTaskUseCase unit test', () => {
 	});
 
 	it('creates a task and return the id', async () => {
-		const task: Task =
-			TaskMother.random();
-
 		const id = await createTaskUseCase.execute({
-			title: task.title,
-			status: task.status,
+			title: "random title",
 		});
 
 		expect(mockTaskRepository.save).toHaveBeenCalledTimes(1);
 		expect(mockTaskRepository.save).toHaveBeenCalledWith({
 			id,
-			title: task.title,
-			status: task.status,
+			title: "random title",
+			status: TaskStatus.BACKLOG,
 		});
 	});
 });

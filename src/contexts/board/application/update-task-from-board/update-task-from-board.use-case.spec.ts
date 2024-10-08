@@ -68,4 +68,75 @@ describe('UpdateTaskFromBoardUseCase unit test', () => {
 			})
 		).rejects.toThrow(InvalidTaskMovementError);
 	});
+	it('should be able to update only the title', async () => {
+		const taskToUpdate = TaskMother.random({
+			status: TaskStatus.BACKLOG,
+			title: 'old',
+		});
+		const tasks: Task[] = [
+			taskToUpdate,
+			TaskMother.random(),
+		];
+
+		mockTaskRepository.findAll.mockResolvedValue(tasks);
+		mockTaskRepository.findById.mockResolvedValueOnce(taskToUpdate);
+
+		await updateTaskUseCase.execute({
+			id: taskToUpdate.id,
+			title: "new",
+		});
+
+		expect(mockTaskRepository.save).toHaveBeenCalledTimes(1);
+		expect(mockTaskRepository.save).toHaveBeenCalledWith({
+			id: taskToUpdate.id,
+			title: 'new',
+			status: TaskStatus.BACKLOG,
+		});
+	});
+	it('should be able to update only the status', async () => {
+		const taskToUpdate = TaskMother.random({
+			status: TaskStatus.BACKLOG,
+			title: 'old',
+		});
+		const tasks: Task[] = [
+			taskToUpdate,
+			TaskMother.random(),
+		];
+
+		mockTaskRepository.findAll.mockResolvedValue(tasks);
+		mockTaskRepository.findById.mockResolvedValueOnce(taskToUpdate);
+
+		await updateTaskUseCase.execute({
+			id: taskToUpdate.id,
+			status: TaskStatus.TODO,
+		});
+
+		expect(mockTaskRepository.save).toHaveBeenCalledTimes(1);
+		expect(mockTaskRepository.save).toHaveBeenCalledWith({
+			id: taskToUpdate.id,
+			title: 'old',
+			status: TaskStatus.TODO,
+		});
+	});
+	it('should not reach database if nothing edited', async () => {
+		const taskToUpdate = TaskMother.random({
+			status: TaskStatus.BACKLOG,
+			title: 'old',
+		});
+		const tasks: Task[] = [
+			taskToUpdate,
+			TaskMother.random(),
+		];
+
+		mockTaskRepository.findAll.mockResolvedValue(tasks);
+		mockTaskRepository.findById.mockResolvedValueOnce(taskToUpdate);
+
+		await updateTaskUseCase.execute({
+			id: taskToUpdate.id,
+			title: taskToUpdate.title,
+		});
+
+		expect(mockTaskRepository.save).toHaveBeenCalledTimes(0);
+	});
+
 });

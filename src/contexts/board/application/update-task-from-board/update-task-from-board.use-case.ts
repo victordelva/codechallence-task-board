@@ -12,23 +12,33 @@ export class UpdateTaskFromBoardUseCase {
 	}
 
 	async execute(request: UpdateTaskFromBoardRequest) {
-		const allTasks = await this.taskRepository.findAll();
-		const board = new Board({
-			tasks: allTasks,
-		});
-
 		let task = await this.taskRepository.findById(request.id);
 
 		if (!task) {
 			throw new TaskNotFoundError();
 		}
 
-		task = board.moveTask(task, request.status as TaskStatus);
-
-		task.update({
-			title: request.title,
+		const allTasks = await this.taskRepository.findAll();
+		const board = new Board({
+			tasks: allTasks,
 		});
 
-		await this.taskRepository.save(task);
+		let taskUpdated = false;
+
+		if (request.status) {
+			task = board.moveTask(task, request.status as TaskStatus);
+			taskUpdated = true;
+		}
+
+		if (request.title && request.title !== task.title) {
+			task.update({
+				title: request.title,
+			});
+			taskUpdated = true;
+		}
+
+		if (taskUpdated) {
+			await this.taskRepository.save(task);
+		}
 	}
 }
