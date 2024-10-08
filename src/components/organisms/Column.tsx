@@ -12,7 +12,7 @@ export default function Column({
   totalTasks: number;
 }) {
   return (
-    <div className="min-w-96 w-96 m-2 bg-gray-200 p-2">
+    <div className="min-w-96 w-96 m-2 bg-gray-200 p-2 rounded-md">
       <div className="flex justify-between">
         <div className="text-lg font-bold text-center border-b border-black">
           {status}
