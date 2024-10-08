@@ -29,7 +29,7 @@ export function BoardScene() {
   return (
     <>
       <CreateNewTaskSection onSave={refetch} />
-      <div className="flex overflow-x-scroll h-dvh m-2">
+      <div className="flex overflow-x-scroll min-h-80 max-h-dvh m-2">
         {Object.values(TaskStatus).map((status) => (
           <Column
             key={status}
@@ -49,7 +49,6 @@ export function BoardScene() {
             ))}
           </Column>
         ))}
-        ;
       </div>
 
       <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}>
