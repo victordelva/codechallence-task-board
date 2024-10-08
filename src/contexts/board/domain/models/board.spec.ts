@@ -4,7 +4,7 @@ import { TaskMother } from "@/contexts/board/domain/models/task.mother";
 import { TaskStatus } from "@/contexts/board/domain/models/task-status.enum";
 import { InvalidTaskMovementError } from "@/contexts/board/domain/errors/invalid-task-movement.error";
 
-describe("BoardComponent tests", () => {
+describe("Board tests", () => {
   describe("checks possible movements", () => {
     it("should return all possible movements for a task in BACKLOG", () => {
       const task = TaskMother.random({ status: TaskStatus.BACKLOG });

@@ -1,4 +1,4 @@
-# Tasks BoardComponent
+# Tasks Board
 
 Using NextJS, React, and any SQL database, develop a full stack solution for a BoardComponent with 4 columns: `BACKLOG` `TODO` `DOING` `DONE`
 

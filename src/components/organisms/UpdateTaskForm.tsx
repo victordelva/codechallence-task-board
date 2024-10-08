@@ -7,7 +7,7 @@ import { OptionButton } from "@/components/molecules/OptionButton";
 import { Input } from "@/components/atoms/Input";
 import Popup from "@/components/molecules/PopUp";
 
-export function TaskForm({
+export function UpdateTaskForm({
   id,
   title,
   status,
@@ -54,12 +54,13 @@ export function TaskForm({
       <h2 className="font-bold text-2xl mb-4">Edit task</h2>
       <div className="flex gap-1 justify-between items-center">
         <Input
+          label="Title"
           className="w-full mr-4"
           placeholder={"Set Title"}
           onChange={setTitle}
           value={_title}
         />
-        <div>
+        <div className="flex content-center">
           <StatusChip status={status} />
         </div>
       </div>

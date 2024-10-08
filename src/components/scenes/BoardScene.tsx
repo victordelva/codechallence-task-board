@@ -7,9 +7,10 @@ import Popup from "@/components/molecules/PopUp";
 import { useEffect, useState } from "react";
 import { Task } from "@/contexts/board/domain/models/task";
 import { Board } from "@/contexts/board/domain/models/board";
-import { TaskForm } from "@/components/scenes/TaskForm";
+import { UpdateTaskForm } from "@/components/organisms/UpdateTaskForm";
+import { CreateNewTaskSection } from "@/components/molecules/CreateNewTaskSection";
 
-export function BoardComponent() {
+export function BoardScene() {
   const { data: tasksByStatus, all: tasks, refetch } = useTasksByStatus();
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
@@ -27,6 +28,7 @@ export function BoardComponent() {
 
   return (
     <>
+      <CreateNewTaskSection onSave={refetch} />
       <div className="flex overflow-x-scroll h-dvh m-2">
         {Object.values(TaskStatus).map((status) => (
           <Column
@@ -52,7 +54,7 @@ export function BoardComponent() {
 
       <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}>
         {selectedTask && (
-          <TaskForm
+          <UpdateTaskForm
             id={selectedTask.id}
             title={selectedTask.title}
             status={selectedTask.status}
