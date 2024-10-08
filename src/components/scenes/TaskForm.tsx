@@ -4,6 +4,7 @@ import StatusChip from "@/components/atoms/StatusChip";
 import { useState} from "react";
 import {Button} from "@/components/atoms/Button";
 import {OptionButton} from "@/components/molecules/OptionButton";
+import {Input} from "@/components/atoms/Input";
 
 export function TaskForm({
 	id,
@@ -25,13 +26,7 @@ export function TaskForm({
 	const save = async () => {
 		if (isLoading) return;
 		setIsLoading(true);
-		console.log({
-			method: 'PUT',
-			body: JSON.stringify({
-				title: _title,
-				status: _status,
-			}),
-		});
+
 		await fetch(`/api/tasks/${id}`, {
 			method: 'PUT',
 			body: JSON.stringify({
@@ -47,12 +42,16 @@ export function TaskForm({
 	return (
 		<>
 			<h2 className="font-bold text-2xl mb-4">Edit task</h2>
-			<div className="flex gap-1 justify-between">
-				<input
-					onChange={(e) => setTitle(e.target.value)}
-					type="text" value={_title}
+			<div className="flex gap-1 justify-between items-center">
+				<Input
+					className="w-full mr-4"
+					placeholder={"Set Title"}
+					onChange={setTitle}
+					value={_title}
 				/>
-				<StatusChip status={status} />
+				<div>
+					<StatusChip status={status} />
+				</div>
 			</div>
 			<div className="mt-5 font-semibold">
 				Move task to:
