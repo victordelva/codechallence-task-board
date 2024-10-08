@@ -11,7 +11,7 @@ import {TaskForm} from "@/components/scenes/TaskForm";
 
 
 export function BoardComponent() {
-	const {data: tasksByStatus, all: tasks} = useTasksByStatus();
+	const {data: tasksByStatus, all: tasks, refetch} = useTasksByStatus();
 	const [showPopup, setShowPopup] = useState(false);
 	const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 	const [selectedTaskPossibleMoves, setSelectedTaskPossibleMoves] = useState<TaskStatus[]>([]);
@@ -58,6 +58,10 @@ export function BoardComponent() {
 							title={selectedTask.title}
 							status={selectedTask.status}
 							possibleMoves={selectedTaskPossibleMoves}
+							onSave={async () => {
+								refetch();
+								setShowPopup(false);
+							}}
 					/>}
 			</Popup>
 		</>

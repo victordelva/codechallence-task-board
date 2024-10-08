@@ -1,27 +1,30 @@
 "use client";
-import {Task} from "@/contexts/board/domain/models/task";
 import {TaskStatus} from "@/contexts/board/domain/models/task-status.enum";
 import StatusChip from "@/components/atoms/StatusChip";
-import {useEffect, useState} from "react";
+import { useState} from "react";
+import {Button} from "@/components/atoms/Button";
+import {OptionButton} from "@/components/molecules/OptionButton";
 
 export function TaskForm({
 	id,
 	title,
 	status,
 	possibleMoves,
+	onSave,
 }: {
 	id: string;
 	title: string;
 	status: TaskStatus;
 	possibleMoves: TaskStatus[];
+	onSave: () => void;
 }) {
-	const [loading, setLoading] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 	const [_title, setTitle] = useState(title);
 	const [_status, setStatus] = useState<TaskStatus | null>(null);
 
 	const save = async () => {
-		if (loading) return;
-		setLoading(true);
+		if (isLoading) return;
+		setIsLoading(true);
 		console.log({
 			method: 'PUT',
 			body: JSON.stringify({
@@ -37,7 +40,8 @@ export function TaskForm({
 			}),
 		});
 
-		setLoading(false)
+		setIsLoading(false);
+		onSave && onSave();
 	}
 
 	return (
@@ -53,20 +57,29 @@ export function TaskForm({
 			<div className="mt-5 font-semibold">
 				Move task
 			</div>
-			<div className="flex gap-2 ">
-				{possibleMoves && possibleMoves.map((newStatus) => (
+			<div className="flex gap-2 mt-2">
+				{possibleMoves?.length > 0 && possibleMoves.map((newStatus) => (
 					<>
-						<div
+						<OptionButton
+							key={newStatus}
+							isSelected={newStatus === _status}
 							onClick={() => setStatus(newStatus)}
-						>{newStatus}</div>
+						>{newStatus}</OptionButton>
 					</>
 				))}
-				{!possibleMoves && (
-					<div>No movements possible</div>
+				{!(possibleMoves?.length > 0) && (
+					<div>No possible movements</div>
 				)}
 			</div>
-			<div onClick={save}>
+			<div className="w-full flex justify-end">
+				{isLoading}
+			<Button
+				disabled={isLoading}
+				onClick={save}
+				className="my-2"
+			>
 				Save
+			</Button>
 			</div>
 		</>
 	);
